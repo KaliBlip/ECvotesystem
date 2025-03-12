@@ -76,30 +76,30 @@
             </div>
         </div>
 
-        <?php
+      <?php
         if(isset($_SESSION['error'])){
-            echo "
+          echo "
                 <div class='alert alert-danger alert-dismissible fade show'>
-                    ".$_SESSION['error']."
+              ".$_SESSION['error']."
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                         <span aria-hidden='true'>&times;</span>
                     </button>
-                </div>
-            ";
-            unset($_SESSION['error']);
+            </div>
+          ";
+          unset($_SESSION['error']);
         }
         if(isset($_SESSION['success'])){
-            echo "
+          echo "
                 <div class='alert alert-success alert-dismissible fade show'>
-                    ".$_SESSION['success']."
+              ".$_SESSION['success']."
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                         <span aria-hidden='true'>&times;</span>
                     </button>
-                </div>
-            ";
-            unset($_SESSION['success']);
+            </div>
+          ";
+          unset($_SESSION['success']);
         }
-        ?>
+      ?>
 
         <div class="card">
             <div class="card-header">
@@ -118,7 +118,7 @@
             </div>
             <div class="table-responsive">
                 <table class="table">
-                    <thead>
+                <thead>
                         <tr>
                             <th>Description <i class="fas fa-sort"></i></th>
                             <th>Department Category <i class="fas fa-sort"></i></th>
@@ -126,19 +126,19 @@
                             <th>Maximum Vote <i class="fas fa-sort"></i></th>
                             <th>Actions</th>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $sql = "SELECT * FROM positions ORDER BY priority ASC";
-                        $query = $conn->query($sql);
-                        while($row = $query->fetch_assoc()){
-                            echo "
+                </thead>
+                <tbody>
+                  <?php
+                    $sql = "SELECT * FROM positions ORDER BY priority ASC";
+                    $query = $conn->query($sql);
+                    while($row = $query->fetch_assoc()){
+                      echo "
                                 <tr>
-                                    <td>".$row['description']."</td>
-                                    <td>".$row['dept_category']."</td>
-                                    <td>".$row['gender_class']."</td>
-                                    <td>".$row['max_vote']."</td>
-                                    <td>
+                          <td>".$row['description']."</td>
+                          <td>".$row['dept_category']."</td>
+                          <td>".$row['gender_class']."</td>
+                          <td>".$row['max_vote']."</td>
+                          <td>
                                         <div class='action-buttons'>
                                             <button class='btn-icon edit' data-id='".$row['id']."' title='Edit'>
                                                 <i class='fas fa-edit'></i>
@@ -147,13 +147,13 @@
                                                 <i class='fas fa-trash'></i>
                                             </button>
                                         </div>
-                                    </td>
-                                </tr>
-                            ";
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                          </td>
+                        </tr>
+                      ";
+                    }
+                  ?>
+                </tbody>
+              </table>
             </div>
             <div class="card-footer">
                 <div class="pagination-info">
@@ -163,16 +163,16 @@
                     <button class="btn-page" disabled><i class="fas fa-chevron-left"></i></button>
                     <button class="btn-page active">1</button>
                     <button class="btn-page" disabled><i class="fas fa-chevron-right"></i></button>
-                </div>
             </div>
+          </div>
         </div>
-    </div>
-
-    <?php include 'includes/positions_modal.php'; ?>
+  </div>
+    
+  <?php include 'includes/positions_modal.php'; ?>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
+<script>
         // Mobile menu toggle
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.createElement('button');
@@ -329,39 +329,39 @@
         // Modal handlers
         $(document).ready(function() {
             $(document).on('click', '.edit', function(e) {
-                e.preventDefault();
-                var id = $(this).data('id');
-                getRow(id);
+    e.preventDefault();
+    var id = $(this).data('id');
+    getRow(id);
                 $('#edit').modal('show');
-            });
+  });
 
             $(document).on('click', '.delete', function(e) {
-                e.preventDefault();
-                var id = $(this).data('id');
-                getRow(id);
+    e.preventDefault();
+    var id = $(this).data('id');
+    getRow(id);
                 $('#delete').modal('show');
-            });
-        });
+  });
+});
 
         function getRow(id) {
-            $.ajax({
-                type: 'POST',
-                url: 'positions_row.php',
+  $.ajax({
+    type: 'POST',
+    url: 'positions_row.php',
                 data: {id: id},
-                dataType: 'json',
+    dataType: 'json',
                 success: function(response) {
-                    $('.id').val(response.id);
-                    $('#edit_description').val(response.description);
-                    $('#edit_max_vote').val(response.max_vote);
+      $('.id').val(response.id);
+      $('#edit_description').val(response.description);
+      $('#edit_max_vote').val(response.max_vote);
                     $('#edit_dept_category').val(response.dept_category);
                     $('#edit_gender_class').val(response.gender_class);
-                    $('.description').html(response.description);
+      $('.description').html(response.description);
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error);
-                }
-            });
-        }
-    </script>
+    }
+  });
+}
+</script>
 </body>
 </html>

@@ -1,17 +1,25 @@
 <!-- Preview -->
 <div class="modal fade" id="preview_modal">
-    <div class="modal-dialog">
-        <div class="modal-content" style="background-color: #d8d1bd ;color:black ; font-size: 15px; font-family:Times" >
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
             <div class="modal-header">
-              <button type="button"  class=" btn btn-close btn-curve pull-right" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" style="color:black ; font-size: 15px; font-family:Times">Vote Preview</h4>
+                <h4 class="modal-title">
+                    <i class="fas fa-check-double"></i> Review Your Votes
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-              <div id="preview_body"></div>
+                <div class="preview-container" id="preview_body"></div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default btn-curve pull-left" style='background-color:  #FFDEAD  ;color:black ; font-size: 12px; font-family:Times' data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <i class="fas fa-times"></i> Make Changes
+                </button>
+                <button type="submit" class="btn btn-success" form="ballotForm" name="vote">
+                    <i class="fas fa-check-circle"></i> Submit Ballot
+                </button>
             </div>
         </div>
     </div>
