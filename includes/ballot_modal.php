@@ -3,7 +3,7 @@
     <div class="modal-dialog">
         <div class="modal-content" style="background-color: #d8d1bd ;color:black ; font-size: 15px; font-family:Times" >
             <div class="modal-header">
-              <button type="button"  class=" btn btn-close btn-curve pull-right" data-dismiss="modal" aria-label="Close">
+              <button type="button" class="btn btn-primary btn-curve pull-right" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title" style="color:black ; font-size: 15px; font-family:Times">Vote Preview</h4>
             </div>
@@ -11,7 +11,7 @@
               <div id="preview_body"></div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default btn-curve pull-left" style='background-color:  #FFDEAD  ;color:black ; font-size: 12px; font-family:Times' data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+              <button type="button" class="btn btn-primary btn-curve pull-left" style='font-size: 12px; font-family:Times' data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
             </div>
         </div>
     </div>

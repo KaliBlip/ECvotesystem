@@ -12,7 +12,7 @@
 <div class="login-container">
     <div class="login-box">
         <div class="login-logo">
-            <b>Online Voting System</b>
+            <b>Student Voting System</b>
         </div>
      
         <div class="login-box-body">
@@ -26,9 +26,9 @@
                     </div>
                 </div>
                 <div class="form-group has-feedback">
-                    <label for="password">Password</label>
+                    <label for="password">Index Number</label>
                     <div class="input-with-icon">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                        <input type="text" class="form-control" id="password" name="password" placeholder="Enter your index number" required>
                         <i class="icon fa fa-lock"></i>
                     </div>
                 </div>

@@ -153,7 +153,7 @@
                             $image = (!empty($crow['photo'])) ? 'images/'.$crow['photo'] : 'images/profile.jpg';
                             
                             $candidates_list .= '
-                                <div class="candidate-card">
+                                <div class="candidate-card" data-candidate-id="'.$crow['id'].'" data-input-name="'.slugify($row['description']).'">
                                     <div class="candidate-select-area">
                                         '.$input.'
                                     </div>
@@ -323,7 +323,40 @@
             positions[currentPosition].style.display = 'block';
             updateNavigation();
         });
+
+        // Candidate card click selection
+        $(document).on('click', '.candidate-card', function(e) {
+            // Prevent About Me button from triggering card selection
+            if($(e.target).closest('button').length > 0) return;
+            var input = $(this).find('input.candidate-select');
+            if(input.attr('type') === 'checkbox') {
+                input.prop('checked', !input.prop('checked')).trigger('change');
+            } else if(input.attr('type') === 'radio') {
+                input.prop('checked', true).trigger('change');
+            }
+        });
+
+        // Visual highlight for selected cards
+        function updateCardSelection() {
+            $('.candidate-card').each(function() {
+                var input = $(this).find('input.candidate-select');
+                if(input.is(':checked')) {
+                    $(this).addClass('selected');
+                } else {
+                    $(this).removeClass('selected');
+                }
+            });
+        }
+        $(document).on('change', '.candidate-select', updateCardSelection);
+        updateCardSelection();
     });
     </script>
+    <style>
+    .candidate-card.selected {
+        border: 2px solid #007bff;
+        box-shadow: 0 0 8px #007bff33;
+        background: #f0f8ff;
+    }
+    </style>
 </body>
 </html>

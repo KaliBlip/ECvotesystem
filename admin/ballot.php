@@ -133,7 +133,7 @@
                             <div class='candidate-info'>
                                 <h4>".$crow['firstname']." ".$crow['lastname']."</h4>
                                 <button class='btn btn-sm btn-info view-platform' data-id='".$crow['id']."'>
-                                    <i class='fas fa-eye'></i> Platform
+                                    <i class='fas fa-eye'></i> About Me
                                 </button>
                             </div>
                         </div>

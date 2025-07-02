@@ -9,7 +9,7 @@
 <div class="login-container">
     <div class="login-box">
         <div class="login-logo">
-            <b>Online Voting System</b>
+            <b>Admin Voting Dashboard</b>
         </div>
      
         <div class="login-box-body">
