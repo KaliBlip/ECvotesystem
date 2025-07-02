@@ -163,7 +163,7 @@
                                     <div class="candidate-info">
                                         <h4>'.$crow['firstname'].' '.$crow['lastname'].'</h4>
                                         <button type="button" class="btn btn-sm btn-info platform" data-platform="'.$crow['platform'].'" data-fullname="'.$crow['firstname'].' '.$crow['lastname'].'" data-photo="'.$image.'">
-                                            <i class="fas fa-eye"></i> View Platform
+                                            <i class="fas fa-eye"></i> About Me
                                         </button>
                                     </div>
                                 </div>

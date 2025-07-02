@@ -37,6 +37,7 @@
                             <option value="">Select Department</option>
                             <option value="Pasag">PASAG</option>
                             <option value="Puganms">PUGANMS</option>
+                            <option value="COMPSA">COMPSA</option>
                         </select>
                     </div>
                     <div class="form-group">

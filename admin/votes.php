@@ -1,6 +1,7 @@
 <?php include 'includes/session.php'; ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -48,6 +50,21 @@
                 <span>Candidates</span>
             </a>
         </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">SETTINGS</div>
+            <a href="ballot.php" class="nav-item">
+                <i class="fas fa-file-alt"></i>
+                <span>Ballot Position</span>
+            </a>
+            <a href="#" class="nav-item" onclick="document.getElementById('logout').click();">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+            <form action="logout.php" method="POST" style="display: none;">
+                <button id="logout" type="submit" name="logout">Logout</button>
+            </form>
+        </div>
     </div>
 
     <!-- Main Content -->
@@ -71,24 +88,24 @@
         </div>
 
         <?php
-        if(isset($_SESSION['error'])){
+        if (isset($_SESSION['error'])) {
             echo "
                 <div class='alert alert-danger alert-dismissible fade show'>
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                         <span aria-hidden='true'>&times;</span>
                     </button>
-                    <i class='fas fa-exclamation-triangle'></i> ".$_SESSION['error']."
+                    <i class='fas fa-exclamation-triangle'></i> " . $_SESSION['error'] . "
                 </div>
             ";
             unset($_SESSION['error']);
         }
-        if(isset($_SESSION['success'])){
+        if (isset($_SESSION['success'])) {
             echo "
                 <div class='alert alert-success alert-dismissible fade show'>
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                         <span aria-hidden='true'>&times;</span>
                     </button>
-                    <i class='fas fa-check'></i> ".$_SESSION['success']."
+                    <i class='fas fa-check'></i> " . $_SESSION['success'] . "
                 </div>
             ";
             unset($_SESSION['success']);
@@ -131,13 +148,13 @@
                                 LEFT JOIN voters ON voters.id=votes.voters_id 
                                 ORDER BY positions.priority ASC";
                         $query = $conn->query($sql);
-                        while($row = $query->fetch_assoc()){
+                        while ($row = $query->fetch_assoc()) {
                             echo "
                                 <tr>
-                                    <td>".$row['description']."</td>
-                                    <td>".$row['canfirst'].' '.$row['canlast']."</td>
-                                    <td>".$row['votfirst'].' '.$row['votlast']."</td>
-                                    <td>".date('M d, Y h:i A')."</td>
+                                    <td>" . $row['description'] . "</td>
+                                    <td>" . $row['canfirst'] . ' ' . $row['canlast'] . "</td>
+                                    <td>" . $row['votfirst'] . ' ' . $row['votlast'] . "</td>
+                                    <td>" . date('M d, Y h:i A') . "</td>
                                 </tr>
                             ";
                         }
@@ -163,159 +180,193 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-    body {
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-        overflow-x: hidden;
-    }
-    .content {
-        padding: 20px;
-        margin-left: 250px;
-        background-color: #f4f6f9;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        width: calc(100vw - 250px);
-        box-sizing: border-box;
-    }
-    .page-header {
-        margin-bottom: 1.5rem;
-        width: 100%;
-    }
-    .card {
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-        margin-bottom: 20px;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        min-width: 0; /* Prevents flex item from overflowing */
-    }
-    .card-header {
-        padding: 1rem 1.5rem;
-        background: #fff;
-        border-bottom: 1px solid #edf2f9;
-        width: 100%;
-    }
-    .table-responsive {
-        flex: 1;
-        overflow: auto;
-        min-height: 400px;
-        width: 100%;
-    }
-    .table {
-        margin-bottom: 0;
-        width: 100%;
-        table-layout: fixed;
-    }
-    .table thead {
-        position: sticky;
-        top: 0;
-        z-index: 1;
-        background: #f8f9fa;
-    }
-    .table th {
-        border-top: none;
-        background: #f8f9fa;
-        padding: 1rem;
-        font-weight: 600;
-        white-space: nowrap;
-    }
-    .table td {
-        padding: 1rem;
-        vertical-align: middle;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    .table th:nth-child(1), 
-    .table td:nth-child(1) { width: 25%; }
-    .table th:nth-child(2), 
-    .table td:nth-child(2) { width: 25%; }
-    .table th:nth-child(3), 
-    .table td:nth-child(3) { width: 25%; }
-    .table th:nth-child(4), 
-    .table td:nth-child(4) { width: 25%; }
-    
-    .card-tools {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1rem;
-    }
-    .search-box {
-        position: relative;
-        width: 300px;
-        min-width: 200px;
-        flex-shrink: 1;
-    }
-    .card-footer {
-        background: #fff;
-        padding: 1rem 1.5rem;
-        border-top: 1px solid #edf2f9;
-        width: 100%;
-    }
-    .pagination {
-        margin: 0;
-        gap: 5px;
-    }
-    .btn-page {
-        padding: 0.375rem 0.75rem;
-        border: 1px solid #dee2e6;
-        background: #fff;
-        color: #6c757d;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-    .btn-page.active {
-        background: #007bff;
-        color: #fff;
-        border-color: #007bff;
-    }
-    .btn-page:disabled {
-        cursor: not-allowed;
-        opacity: 0.6;
-    }
-    .table-hover tbody tr:hover {
-        background-color: rgba(0,0,0,.02);
-    }
-    @media (max-width: 768px) {
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
         .content {
-            margin-left: 0;
-            padding: 15px;
-            width: 100vw;
-        }
-        .card-tools {
+            padding: 20px;
+            margin-left: 250px;
+            background-color: #f4f6f9;
+            min-height: 100vh;
+            display: flex;
             flex-direction: column;
-            gap: 10px;
+            width: calc(100vw - 250px);
+            box-sizing: border-box;
         }
-        .search-box {
+
+        .page-header {
+            margin-bottom: 1.5rem;
             width: 100%;
         }
-        .card-footer {
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            flex: 1;
+            display: flex;
             flex-direction: column;
-            gap: 10px;
-            text-align: center;
+            width: 100%;
+            min-width: 0;
+            /* Prevents flex item from overflowing */
         }
-        .table th:nth-child(1), 
-        .table td:nth-child(1),
-        .table th:nth-child(2), 
-        .table td:nth-child(2),
-        .table th:nth-child(3), 
-        .table td:nth-child(3),
-        .table th:nth-child(4), 
+
+        .card-header {
+            padding: 1rem 1.5rem;
+            background: #fff;
+            border-bottom: 1px solid #edf2f9;
+            width: 100%;
+        }
+
+        .table-responsive {
+            flex: 1;
+            overflow: auto;
+            min-height: 400px;
+            width: 100%;
+        }
+
+        .table {
+            margin-bottom: 0;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        .table thead {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background: #f8f9fa;
+        }
+
+        .table th {
+            border-top: none;
+            background: #f8f9fa;
+            padding: 1rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .table td {
+            padding: 1rem;
+            vertical-align: middle;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .table th:nth-child(1),
+        .table td:nth-child(1) {
+            width: 25%;
+        }
+
+        .table th:nth-child(2),
+        .table td:nth-child(2) {
+            width: 25%;
+        }
+
+        .table th:nth-child(3),
+        .table td:nth-child(3) {
+            width: 25%;
+        }
+
+        .table th:nth-child(4),
         .table td:nth-child(4) {
-            width: auto;
-            min-width: 150px;
+            width: 25%;
         }
-    }
+
+        .card-tools {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-box {
+            position: relative;
+            width: 300px;
+            min-width: 200px;
+            flex-shrink: 1;
+        }
+
+        .card-footer {
+            background: #fff;
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #edf2f9;
+            width: 100%;
+        }
+
+        .pagination {
+            margin: 0;
+            gap: 5px;
+        }
+
+        .btn-page {
+            padding: 0.375rem 0.75rem;
+            border: 1px solid #dee2e6;
+            background: #fff;
+            color: #6c757d;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-page.active {
+            background: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+        .btn-page:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(0, 0, 0, .02);
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                margin-left: 0;
+                padding: 15px;
+                width: 100vw;
+            }
+
+            .card-tools {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .card-footer {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .table th:nth-child(1),
+            .table td:nth-child(1),
+            .table th:nth-child(2),
+            .table td:nth-child(2),
+            .table th:nth-child(3),
+            .table td:nth-child(3),
+            .table th:nth-child(4),
+            .table td:nth-child(4) {
+                width: auto;
+                min-width: 150px;
+            }
+        }
     </style>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Get all table rows
             const tableRows = document.querySelectorAll('tbody tr');
             const totalRows = tableRows.length;
@@ -329,7 +380,7 @@
             function showPage(page) {
                 const start = (page - 1) * itemsPerPage;
                 const end = start + itemsPerPage;
-                
+
                 tableRows.forEach((row, index) => {
                     if (!row.hasAttribute('data-filtered')) {
                         if (index >= start && index < end) {
@@ -345,37 +396,37 @@
                 const pagination = document.querySelector('.pagination');
                 const visibleRows = Array.from(tableRows).filter(row => !row.hasAttribute('data-filtered')).length;
                 const totalPages = Math.ceil(visibleRows / itemsPerPage);
-                
+
                 let paginationHTML = `
                     <button class="btn-page" ${currentPage === 1 ? 'disabled' : ''}>
                         <i class="fas fa-chevron-left"></i>
                     </button>
                 `;
-                
+
                 for (let i = 1; i <= totalPages; i++) {
                     paginationHTML += `
                         <button class="btn-page ${currentPage === i ? 'active' : ''}">${i}</button>
                     `;
                 }
-                
+
                 paginationHTML += `
                     <button class="btn-page" ${currentPage === totalPages ? 'disabled' : ''}>
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 `;
-                
+
                 pagination.innerHTML = paginationHTML;
-                
+
                 // Update showing entries text
                 const start = ((currentPage - 1) * itemsPerPage) + 1;
                 const end = Math.min(currentPage * itemsPerPage, visibleRows);
-                document.querySelector('.pagination-info').innerHTML = 
+                document.querySelector('.pagination-info').innerHTML =
                     `Showing <span>${start}</span> to <span>${end}</span> of <span>${visibleRows}</span> entries`;
             }
 
             // Search functionality
             const searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('keyup', function() {
+            searchInput.addEventListener('keyup', function () {
                 const filter = this.value.toLowerCase();
                 let visibleCount = 0;
 
@@ -383,14 +434,14 @@
                 tableRows.forEach(row => {
                     const cells = row.getElementsByTagName('td');
                     let found = false;
-                    
+
                     for (let cell of cells) {
                         if (cell.textContent.toLowerCase().indexOf(filter) > -1) {
                             found = true;
                             break;
                         }
                     }
-                    
+
                     if (found) {
                         row.removeAttribute('data-filtered');
                         visibleCount++;
@@ -413,7 +464,7 @@
             updatePagination();
 
             // Pagination click handlers
-            document.querySelector('.pagination').addEventListener('click', function(e) {
+            document.querySelector('.pagination').addEventListener('click', function (e) {
                 if (e.target.classList.contains('btn-page')) {
                     const text = e.target.textContent.trim();
                     if (text === '') {
@@ -438,7 +489,7 @@
             });
 
             // Entries per page change handler
-            entriesSelect.addEventListener('change', function() {
+            entriesSelect.addEventListener('change', function () {
                 itemsPerPage = parseInt(this.value);
                 currentPage = 1;
                 showPage(currentPage);
@@ -447,4 +498,5 @@
         });
     </script>
 </body>
+
 </html>
