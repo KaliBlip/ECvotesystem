@@ -19,8 +19,8 @@
                         <input type="text" class="form-control" id="lastname" name="lastname" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <label for="password">Index Number</label>
+                        <input type="text" class="form-control" id="password" name="password" required>
                     </div>
                     <div class="form-group">
                         <label for="gender">Gender</label>

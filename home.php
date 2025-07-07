@@ -211,7 +211,7 @@
     <!-- Footer -->
     <footer class="main-footer">
         <div class="container">
-            <p>&copy; <?php echo date('Y'); ?> Nursing University Elections</p>
+            <p>&copy; <?php echo date('Y'); ?> KaliBlip</p>
         </div>
     </footer>
 

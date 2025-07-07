@@ -18,20 +18,21 @@
         <div class="login-box-body">
             <p class="login-box-msg">Sign in to start your voting session</p>
             <form action="login.php" method="POST">
-                <div class="form-group has-feedback">
-                    <label for="voter">Voter ID</label>
+            <div class="form-group has-feedback">
+                    <label for="password">Index Number</label>
                     <div class="input-with-icon">
-                        <input type="text" class="form-control" id="voter" name="voter" placeholder="Enter your Voter's ID" required>
+                        <input type="text" class="form-control" id="password" name="password" placeholder="Enter your index number" required>
                         <i class="icon fa fa-user"></i>
                     </div>
                 </div>
                 <div class="form-group has-feedback">
-                    <label for="password">Index Number</label>
+                    <label for="voter">Voter ID</label>
                     <div class="input-with-icon">
-                        <input type="text" class="form-control" id="password" name="password" placeholder="Enter your index number" required>
+                        <input type="text" class="form-control" id="voter" name="voter" placeholder="Enter your Voter's ID" required>
                         <i class="icon fa fa-lock"></i>
                     </div>
                 </div>
+                
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary" name="login">
                         <i class="fa fa-sign-in"></i> Sign In
@@ -50,8 +51,8 @@
             }
         ?>
         <div class="login-footer">
-            <p>First time voter? <a href="#">Registration Instructions</a></p>
-            <p>Having trouble? <a href="#">Contact Support</a></p>
+            <p>First time voter? <a href="#">View  Instructions</a></p>
+            <p>Having trouble? <a href="tel: +233599987160">Contact Support</a></p>
         </div>
     </div>
 </div>
